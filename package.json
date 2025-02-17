@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@tailwindcss/vite": "^4.0.6",
     "firebase": "^10.2.0",
+    "lucide-react": "^0.475.0",
     "openai": "^4.0.1",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
