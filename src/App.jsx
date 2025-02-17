@@ -1,8 +1,13 @@
+import { RouterProvider } from "react-router-dom";
+import appRouter from "./routes/app-routes";
+import { Provider } from "react-redux";
+import appStore from "./hooks/app-store";
+
 const App = () => {
   return (
-    <div className="">
-      <h1 className="text-3xl text-blue-500 text-center">React App</h1>
-    </div>
+    <Provider store={appStore}>
+      <RouterProvider router={appRouter} />
+    </Provider>
   );
 };
 
