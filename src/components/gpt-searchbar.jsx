@@ -17,35 +17,26 @@ const GptSearchBar = () => {
       API_OPTIONS
     );
     const json = await data.json();
-
     return json.results;
   };
 
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
-    // Make an API call to GPT API and get Movie Results
+    if (!searchText.current.value) return;
 
     const gptQuery = `Act as a Movie Recommendation system and suggest some movies for the query: ${searchText.current.value}. Only give me names of 5 movies, comma separated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya`;
 
     const gptResults = await openai.chat.completions.create({
       messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4-turbo",
     });
 
-    if (!gptResults.choices) {
-      // TODO: Write Error Handling
-    }
-
-    console.log(gptResults.choices?.[0]?.message?.content);
+    if (!gptResults.choices) return;
 
     const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
 
     // Fetch TMDB results for each movie
     const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-
     const tmdbResults = await Promise.all(promiseArray);
-
-    console.log(tmdbResults);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
@@ -53,19 +44,19 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className="pt-[35%] md:pt-[10%] flex justify-center">
+    <div className="pt-20 md:pt-32 flex justify-center w-full px-4">
       <form
-        className="w-full md:w-1/2 bg-black grid grid-cols-12 shadow-lg rounded-lg overflow-hidden"
+        className="w-full max-w-lg bg-black bg-opacity-80 shadow-lg rounded-lg flex flex-col md:flex-row items-center p-4 gap-4"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           ref={searchText}
           type="text"
-          className="p-4 m-4 col-span-9 text-white bg-gray-800 rounded-md outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400"
+          className="w-full md:flex-1 p-3 text-white bg-gray-900 rounded-md outline-none focus:ring-2 focus:ring-red-500 placeholder-gray-400"
           placeholder={lang[langKey].gptSearchPlaceholder}
         />
         <button
-          className="col-span-3 m-4 py-2 px-4 bg-red-700 text-white rounded-md hover:bg-red-800 transition-all duration-300"
+          className="w-full md:w-auto py-3 px-6 bg-red-700 text-white font-semibold rounded-md hover:bg-red-800 transition-all duration-300"
           onClick={handleGptSearchClick}
         >
           {lang[langKey].search}

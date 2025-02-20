@@ -8,14 +8,14 @@ const GPTSearch = () => {
       {/* Background Image */}
       <div className="fixed inset-0 -z-10">
         <img
-          className="w-full h-full object-cover opacity-80 transition-opacity duration-500"
+          className="w-full h-full object-cover opacity-60 transition-opacity duration-500"
           src={BG_URL}
           alt="Background"
         />
       </div>
 
       {/* Search Bar and Suggestions */}
-      <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-50">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-50 px-4">
         <GptSearchBar />
         <GptMovieSuggestions />
       </div>

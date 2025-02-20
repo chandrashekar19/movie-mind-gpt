@@ -54,9 +54,12 @@ const Header = () => {
 
   return (
     <div className="absolute w-full px-8 py-3 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between items-center">
-      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
+      {/* Logo */}
+      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="Netflix Logo" />
+
       {user && (
-        <div className="flex items-center p-2 justify-between w-full md:w-auto">
+        <div className="flex items-center gap-4 p-2 w-full md:w-auto">
+          {/* Language Selection (Only in GPT Search Mode) */}
           {showGptSearch && (
             <select
               className="p-2 m-2 bg-gray-900 text-white rounded-md"
@@ -69,21 +72,25 @@ const Header = () => {
               ))}
             </select>
           )}
+
+          {/* GPT Search/Homepage Toggle */}
           <button
-            className="py-2 px-6 mx-4 my-2 bg-purple-800 text-white rounded-md hover:bg-purple-700 transition-all duration-300"
+            className="py-2 px-6 bg-purple-800 text-white rounded-md hover:bg-purple-700 transition-all duration-300"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
           </button>
-          <img
-            className="hidden md:block w-12 h-12 rounded-full"
-            alt="usericon"
-            src={user?.photoURL}
-          />
+
+          {/* Profile & Sign Out (Wrapped in One Clickable Button) */}
           <button
             onClick={handleSignOut}
-            className="font-bold text-white hover:text-gray-400 transition-all duration-300"
+            className="flex items-center gap-2 text-white font-semibold hover:text-gray-400 transition-all duration-300"
           >
+            <img
+              className="w-8 h-8 md:w-10 md:h-10 border-2 rounded-full border-gray-400"
+              alt="User Icon"
+              src={user?.photoURL}
+            />
             (Sign Out)
           </button>
         </div>
