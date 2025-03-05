@@ -2,6 +2,10 @@
 
 A movie streaming web application powered by **React**, **TailwindCSS**, **Firebase**, and **GPT API** that offers seamless movie browsing, personalized recommendations, and multi-language search.
 
+<div align="center">
+  <img src="./public/movie-mind.png" alt="Food Delivery App Background" width="800" />
+</div>
+
 ## 🚀 Tech Stack
 
 - React.js
